@@ -28,17 +28,22 @@
                                                                                  *)launchOptions {
     
    
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey: @"data"];
-    NSMutableArray *_arrayOurEvents = [NSKeyedUnarchiver unarchiveObjectWithData: data];
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey: @"events"];
+    NSMutableArray *arrOurEvents = [NSKeyedUnarchiver unarchiveObjectWithData: data];
     
     NSString *nameEvent= [NSString stringWithUTF8String:__PRETTY_FUNCTION__];
  
     
     EVAEvent *reception = [[EVAEvent alloc] initWithEventID:[[NSUUID UUID] UUIDString] eventName:nameEvent eventDate: [NSDate date]];
-  
-    [_arrayOurEvents addObject: reception];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [arrOurEvents addObject: reception];
+    
+    if (arrOurEvents){
+        for (EVAEvent *reception in arrOurEvents) {
+            NSLog(@"%@", reception);
+        }
+    }
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
     
     return YES; }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary
@@ -49,7 +54,8 @@
     
     [_arrayOurEvents addObject: reception];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+   
+    //NSLog(@"%s", __PRETTY_FUNCTION__); 
     
     return YES; }
 
@@ -61,7 +67,7 @@
     
     [_arrayOurEvents addObject: reception];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 
@@ -72,7 +78,7 @@
     
     [_arrayOurEvents addObject: reception];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
     
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject: _arrayOurEvents];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"events"];
@@ -87,7 +93,7 @@
     
     [_arrayOurEvents addObject: reception];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 
@@ -98,7 +104,7 @@
     
     [_arrayOurEvents addObject: reception];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 
@@ -109,6 +115,6 @@
     
     [_arrayOurEvents addObject: reception];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 @end
